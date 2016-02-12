@@ -8,7 +8,7 @@
 %define _templatedir %{_datadir}/%{name}/template
 
 Summary: GoogleAmp
-Name: gogleamp
+Name: googleamp
 Version: #VERSION#
 Release: #REVISION#.el6
 Source: %{name}-%{version}-#REVISION#.tar.bz2
