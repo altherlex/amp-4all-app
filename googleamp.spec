@@ -61,7 +61,7 @@ exit 0
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(0644,googleamp,amp, 0755)
+%defattr(0644,googleamp,googleamp, 0755)
 %{appdir}
 
 %changelog
