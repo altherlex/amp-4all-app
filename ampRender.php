@@ -41,7 +41,7 @@ Class ExameAmp
   private $materiaJson;
   private $tipoRecurso;
   private $template;
-  private $templatePath="templates/"; #$_SERVER['DOCUMENT_ROOT']."/"."templates/";
+  private $templatePath="/opt/abril/googleamp/templates/"; #$_SERVER['DOCUMENT_ROOT']."/"."templates/";
   private $url;
 
   public function __construct($url,$debugMode)
