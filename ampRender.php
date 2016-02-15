@@ -3,11 +3,13 @@ if (!isset($argc))
   {
   //==== Default for web server =============================================================
   $urlToTranslate = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+  $environment = 'PROD';
   }
 else
   {
   $devMode    = true;
   $debugMode  = false;
+  $environment = 'DEV';
   if ($argv[2] == "debug")
     {
       $debugMode = true;
@@ -41,7 +43,7 @@ else
   }
 
 
-$exameAmp = new ExameAmp($urlToTranslate,$debugMode);
+$exameAmp = new ExameAmp($urlToTranslate,$debugMode, $environment);
 
 Class ExameAmp
 {
@@ -50,9 +52,12 @@ Class ExameAmp
   private $tipoRecurso;
   private $template;
   private $templatePath="templates/"; #$_SERVER['DOCUMENT_ROOT']."/"."templates/";
+  if ($environment=="PROD"){
+    $templatePath="/opt/abril/googleamp/templates/";
+  }
   private $url;
 
-  public function __construct($url,$debugMode)
+  public function __construct($url,$debugMode, $environment)
     {
       $this->GetUrlInfo($url);
       $this->SetJsonMateria();
@@ -120,6 +125,7 @@ Class ExameAmp
     $ampPage = preg_replace("/<@SUB_TITLE>/"          ,$this->GetHtmlSubTitle()   ,$ampPage);
     $ampPage = preg_replace("/<@DATE_PUBLISHED>/"     ,$this->GetDatePublished()  ,$ampPage);
     $ampPage = preg_replace("/<@DATE_MODIFIED>/"      ,$this->GetDateModified()   ,$ampPage);
+    $ampPage = preg_replace("/<@DATE_MODIFIED-BR>/"   ,$this->GetDateModifiedBR() ,$ampPage);
     $author = $this->GetAuthor();
     if (isset($author)){$author.=", de ";}
     $ampPage = preg_replace("/<@AUTHOR>/"             ,$author                    ,$ampPage);
@@ -192,6 +198,7 @@ Class ExameAmp
 
   private function LoadTemplate()
   {
+    if ()
     $this->template = file_get_contents($this->templatePath.$this->tipoRecurso.".tmpl");
   }
 
@@ -223,6 +230,13 @@ Class ExameAmp
   private function GetDateModified()
   {
     return $this->materiaJson['data_de_atualizacao'];
+  }
+
+  private function GetDateModifiedBR()
+  {
+    print($this->materiaJson['data_de_atualizacao']);
+    preg_match_all("/([0-9]{4})\-([0-9]{2})\-([0-9]{2})T([0-9]{2})\:([0-9]{2})/",$this->materiaJson['data_de_atualizacao'],$vectDate);
+    return $vectDate[3][0] . "/" . $vectDate[2][0] . "/" . $vectDate[1][0]  . " " . $vectDate[4][0]  . ":" .  $vectDate[5][0];
   }
 
   private function GetHtmlBody()
