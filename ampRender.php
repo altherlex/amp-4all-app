@@ -41,7 +41,7 @@ else
   $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
 
  #=== Galeria Photos ==========================================================================================================================
-  $urlToTranslate = "int.amp.exame.abril.com.br?url=negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville";
+  // $urlToTranslate = "int.amp.exame.abril.com.br?url=negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville";
 
   }
 
@@ -242,7 +242,6 @@ Class ExameAmp
 
   private function GetDateModifiedBR()
   {
-    print($this->materiaJson['data_de_atualizacao']);
     preg_match_all("/([0-9]{4})\-([0-9]{2})\-([0-9]{2})T([0-9]{2})\:([0-9]{2})/",$this->materiaJson['data_de_atualizacao'],$vectDate);
     return $vectDate[3][0] . "/" . $vectDate[2][0] . "/" . $vectDate[1][0]  . " " . $vectDate[4][0]  . ":" .  $vectDate[5][0];
   }
@@ -445,8 +444,8 @@ Class ExameAmp
 
   private function Debug()
   {
-    print_r($this->contentInfo);
-    print_r($this->materiaJson);
+    // print_r($this->contentInfo);
+    // print_r($this->materiaJson['canal']['slug']);
   }
 }
 
