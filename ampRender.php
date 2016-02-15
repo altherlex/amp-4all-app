@@ -37,8 +37,11 @@ else
   #=== Facebook =========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/e-uma-das-maiores-descobertas-da-ciencia-diz-zuckerberg";
 
- #=== Galeria ==========================================================================================================================
+ #=== materia com Galeria ==========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
+
+ #=== Galeria Photos ==========================================================================================================================
+  $urlToTranslate = "int.amp.exame.abril.com.br?url=negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville";
 
   }
 
@@ -52,13 +55,14 @@ Class ExameAmp
   private $tipoRecurso;
   private $template;
   private $templatePath="templates/"; #$_SERVER['DOCUMENT_ROOT']."/"."templates/";
-  if ($environment=="PROD"){
-    $templatePath="/opt/abril/googleamp/templates/";
-  }
   private $url;
 
   public function __construct($url,$debugMode, $environment)
     {
+      if ($environment=="PROD")
+        {
+        $templatePath="/opt/abril/googleamp/templates/";
+        }
       $this->GetUrlInfo($url);
       $this->SetJsonMateria();
       $this->SetContentType();
@@ -99,8 +103,13 @@ Class ExameAmp
   }
 
   private function GetTipoRecurso()
-  {
-    return $this->contentInfo['resultado']['tipo_recurso'];
+  {   
+    $returnTipoRecurso = $this->contentInfo['resultado']['tipo_recurso'];
+    if ($returnTipoRecurso != "Notícia")
+    {
+      $returnTipoRecurso = "null";
+    }
+    return $returnTipoRecurso;
   }
 
   private function GetSlug()
@@ -198,7 +207,6 @@ Class ExameAmp
 
   private function LoadTemplate()
   {
-    if ()
     $this->template = file_get_contents($this->templatePath.$this->tipoRecurso.".tmpl");
   }
 
