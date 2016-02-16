@@ -263,7 +263,7 @@ Class ExameAmp
 
   private function GetImageTop()
   {
-    return $this->materiaJson['midias'][0]['transformacoes']['590'];
+    return $this->materiaJson['midias'][0]['transformacoes']['810'];
   }
 
   private function GetImageTopCredit()
