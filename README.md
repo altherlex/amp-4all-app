@@ -41,9 +41,9 @@ ssh t40255@172.16.19.64 -p 5022
 
 [youtube ](http://amp.exame.abril.com.br/tecnologia/noticias/ondas-gravitacionais-previstas-por-einstein-sao-descobertas#development=1)
 
-[Twitter ](http://exame.abril.com.br/negocios/noticias/ceo-do-twitter-doa-parte-de-suas-acoes-aos-seus-funcionarios#development=1)
+[Twitter ](http://amp.exame.abril.com.br/negocios/noticias/ceo-do-twitter-doa-parte-de-suas-acoes-aos-seus-funcionarios#development=1)
 
-[Instagram ](http://exame.abril.com.br/marketing/noticias/estilista-marc-jacobs-procura-por-modelos-no-instagram#development=1)
+[Instagram ](http://amp.exame.abril.com.br/marketing/noticias/estilista-marc-jacobs-procura-por-modelos-no-instagram#development=1)
 
 [Facebook ](http://amp.exame.abril.com.br/tecnologia/noticias/e-uma-das-maiores-descobertas-da-ciencia-diz-zuckerberg#development=1)
 
