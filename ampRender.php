@@ -428,7 +428,7 @@ Class ExameAmp
 
      $banner = "
      <!-- Rectangle -->
-     <div class=\"publicidade\"
+     <div class=\"ad-container\">
      <amp-ad width=300 height=250
      type=\"doubleclick\"
      data-slot=\"/9287/exame/home\"
