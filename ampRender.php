@@ -39,8 +39,11 @@ if (!isset($argc)){
   #=== Galeria Photos ==========================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br?url=negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville";
 
-  #=== Com 2 imagens no corpo da materia ==========================================================================================================================
+  #=== Com imagem no corpo da materia ==========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data";
+  
+  #=== Com 2 imagens no corpo da materia ==========================================================================================================================
+  $urlToTranslate = "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema";
 }
 
 
@@ -66,6 +69,7 @@ Class ExameAmp
       if ($this->tipoRecurso != "404")
         {
           $this->LoadTemplate();
+          $this->SetImage();
           $this->SetYoutubeVideo();
           $this->SetTwitter();
           $this->SetInstagram();
@@ -149,48 +153,10 @@ Class ExameAmp
     print($ampPage);
   }
 
-
-  private function AdjustHtmlBody()
-    {
-      $bodyContent = $this->GetHtmlBody();
-      //=== Insere dominio da exame nas chamadas das imagens que estão no corpo da matéria =====
-      $bodyContent = preg_replace("/src=\"\/assets\/images\//","src=\"http://exame.abril.com.br/assets/images/",$bodyContent);
-
-      //=== Ajusta a nomenclatura das tags de image para a do image amp ========================
-      //<div class=article__body>
-      //<@BODY>
-      ///</div>
-      ///<div class=gallery>
-
-      //$strBody = preg_replace("/\r\n+|\r+|\n+|\t+/i" ,"" ,$bodyContent);
-      //exit($strBody);
-
-/*
-      //<img .*?src=\"(.*?)".*?title=\"(.*?)\".*?\/>
-      $regexImage = '<img .*?src=\"(.*?)\".*?title=\"(.*?)\".*?\/>';
-      preg_match_all("/$regexImage/",$bodyContent,$vectBodyImages);
-
-      for ($x=0; $x<=count($vectBodyImages[0])-1; $x++)
-        {
-          $regexAmpImage = $vectBodyImages[0][$x];
-          $regexAmpImage = str_replace(".", "\.", $regexAmpImage);
-          $regexAmpImage = str_replace("/", "\/", $regexAmpImage);
-          $regexAmpImage = str_replace('"', '\"', $regexAmpImage);
-          //print($regexAmpImage);
-          //print("\n\n");
-          $newImgTag = '<amp-img src="<@IMAGE_AMP>" width="20%" height="90%" layout=responsive class=image></amp-img>';
-          $newImgTag = preg_replace("/<@IMAGE_AMP>/",$vectBodyImages[1][$x],$newImgTag);
-          //print($newImgTag);
-          //print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-          $bodyContent = preg_replace("/$regexAmpImage/",$newImgTag,$bodyContent);
-          //print($bodyContent);
-          //exit();
-        }
-      //exit();
-      //<amp-img src="" layout=responsive class=image></amp-img>
-*/
-      $this->SetHtmlBody($bodyContent);
-    }
+  private function AdjustHtmlBody(){
+    $bodyContent = $this->GetHtmlBody();
+    $this->SetHtmlBody($bodyContent);
+  }
 
   private function SetContentType()
   {
@@ -273,14 +239,21 @@ Class ExameAmp
     return preg_replace("/<(|\/)p>/","",$this->materiaJson['midias'][0]['legenda']);
   }
 
+  private function SetImage(){
+    $content = $this->GetHtmlBody();
+    $content = str_replace("<img","<amp-img",$content);
+    $content = preg_replace("/src=\"\/assets\/images\//","src=\"http://exame.abril.com.br/assets/images/",$content);
+    $content = str_replace("</img>","",$content);
+
+    $this->SetHtmlBody($content);
+  }
+
  private function SetYoutubeVideo()
   {
     $content = $this->GetHtmlBody();
     $regexYoutube = '<iframe.*?youtube.com/embed/(.*?)\".*?iframe>';
     preg_match_all("#$regexYoutube#", $content,$vectYoutube); #-> o # substituiu o / da regex
     $particleTemplateYoutube = file_get_contents('templates/embedded/_youtube.tmpl');
-    // $particleTemplateYoutube2 = '<amp-youtube data-videoid="<@YOUTUBE-ID>" layout="responsive" width="480" height="270"></amp-youtube>';
-    // exit;
     for ($x=0; $x<=count($vectYoutube[0])-1; $x++){
       $regexToChange    = $vectYoutube[0][$x];
       $particleToInject = $particleTemplateYoutube;
