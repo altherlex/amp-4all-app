@@ -48,7 +48,6 @@ if (!isset($argc)){
  #=== materia com Galeria ==========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
 
-
 }
 
 
@@ -143,10 +142,17 @@ Class ExameAmp
     $ampPage = preg_replace("/<@DATE_PUBLISHED>/"     ,$this->GetDatePublished()  ,$ampPage);
     $ampPage = preg_replace("/<@DATE_MODIFIED>/"      ,$this->GetDateModified()   ,$ampPage);
     $ampPage = preg_replace("/<@DATE_MODIFIED-BR>/"   ,$this->GetDateModifiedBR() ,$ampPage);
+    
     $author = $this->GetAuthor();
-    if (isset($author)){$author.=", de ";}
+
+    //Completa a autoria
+
+    if (isset($author)){
+      $author.= $this->GetNewsAgency();
+    }
+
+
     $ampPage = preg_replace("/<@AUTHOR>/"             ,$author                    ,$ampPage);
-    if (!isset($author)){$author.="Exame";}
     $ampPage = preg_replace("/<@AUTHOR-NEWS-ARTICLE>/",$this->GetAuthor()         ,$ampPage);
     $ampPage = preg_replace("/<@BODY>/"               ,$this->GetHtmlBody()       ,$ampPage);
     $ampPage = preg_replace("/<@URL>/"                ,$this->GetUrlPage()        ,$ampPage);
@@ -229,6 +235,11 @@ Class ExameAmp
   private function GetAuthor()
   {
     return $this->materiaJson['jornalistas'][0]['nome'];
+  }
+
+  private function GetNewsAgency()
+  {
+    return ", ".$this->materiaJson['fonte']['preposicao']." ".$this->materiaJson['fonte']['nome'];
   }
 
   private function GetImageTop()
