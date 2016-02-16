@@ -407,7 +407,7 @@ Class ExameAmp
           <amp-lightbox id="lightbox'.$k.'" class="lightbox1" layout="nodisplay">
           <div class="lightbox1-content">
             <div class="image-credit">'.$midia['creditos'].'</div>
-            <amp-img id="img'.$k.'" src="'.$midia['transformacoes']['590'].'" width="590" height="331" layout="responsive" on="tap:lightbox'.$k.'.close"></amp-img>
+            <amp-img id="img'.$k.'" src="'.$midia['transformacoes']['590'].'" width="590" height="331" layout="responsive" on="tap:lightbox'.$k.'.close" role=button""></amp-img>
             <div class="image-caption">'.$midia['alt'].'</div>
             '.$midia['corpo'].'
           </div>
@@ -428,11 +428,12 @@ Class ExameAmp
 
      $banner = "
      <!-- Rectangle -->
+     <div class=\"publicidade\"
      <amp-ad width=300 height=250
      type=\"doubleclick\"
      data-slot=\"/9287/exame/home\"
      json='{\"targeting\":{\"position\":[\"amp\"]}}' >
-     </amp-ad>
+     </amp-ad></div>
      ";
 
      $content = preg_replace("/<p>/"                    ,"<p class='ampBanner'>"  ,$content,4);
