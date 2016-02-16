@@ -39,11 +39,14 @@ if (!isset($argc)){
   #=== Galeria Photos ==========================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br?url=negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville";
 
-  #=== Com imagem no corpo da materia ==========================================================================================================================
+#=== Com imagem no corpo da materia ==========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data";
+  
   
   #=== Com 2 imagens no corpo da materia ==========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema";
+
+
 }
 
 
@@ -239,14 +242,36 @@ Class ExameAmp
     return preg_replace("/<(|\/)p>/","",$this->materiaJson['midias'][0]['legenda']);
   }
 
+
   private function SetImage(){
     $content = $this->GetHtmlBody();
-    $content = str_replace("<img","<amp-img",$content);
-    $content = preg_replace("/src=\"\/assets\/images\//","src=\"http://exame.abril.com.br/assets/images/",$content);
-    $content = str_replace("</img>","",$content);
 
+    $regexImage = '<div class=\"info-img-articles\">.*?<p class=\"author\".*?>(.*?)<\/p>.*?<img.*? src=\"(.*?)\".*?\/>.*?<p.*?>(.*?)<\/p>.*?<\/div>';
+    preg_match_all("#$regexImage#s", $content,$imageBody);
+
+    foreach($imageBody[0] as $k=>$v){
+
+      $particleTemplateImagem = file_get_contents('templates/embedded/_imagem_corpo.tmpl');
+
+      if(!preg_match('#size_810#',$imageBody)){
+        
+        $patternsSize = array('size_380_','size_460_','size_590_','size_960_');
+        $imageBody = str_replace($patternsSize,'size_810_',$imageBody);
+
+      }
+      
+      $particleTemplateImagem = preg_replace("/<@IMAGE_CREDIT>/", $imageBody[1][$k] ,$particleTemplateImagem);
+      $particleTemplateImagem = preg_replace("/<@IMAGE_SRC>/", $imageBody[2][$k] ,$particleTemplateImagem);
+      $particleTemplateImagem = preg_replace("/<@IMAGE_CAPTION>/", $imageBody[3][$k] ,$particleTemplateImagem);
+      $regexToChange = $imageBody[0][$k];
+      $content = preg_replace("#$regexToChange#", $particleTemplateImagem,$content);
+      
+    }
+    
     $this->SetHtmlBody($content);
   }
+
+
 
  private function SetYoutubeVideo()
   {
@@ -263,6 +288,9 @@ Class ExameAmp
 
     $this->SetHtmlBody($content);
   }
+
+
+
 
   private function SetFacebook()
   {
