@@ -34,9 +34,7 @@ if (!isset($argc)){
   #=== Facebook =========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/e-uma-das-maiores-descobertas-da-ciencia-diz-zuckerberg";
 
-  #=== materia com Galeria ==========================================================================================================================
-  $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
-
+ 
   #=== Galeria Photos ==========================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br?url=negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville";
 
@@ -46,6 +44,9 @@ if (!isset($argc)){
   
   #=== Com 2 imagens no corpo da materia ==========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema";
+
+ #=== materia com Galeria ==========================================================================================================================
+  $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
 
 
 }
@@ -73,12 +74,14 @@ Class ExameAmp
       if ($this->tipoRecurso != "404")
         {
           $this->LoadTemplate();
+
           $this->SetImage();
           $this->SetYoutubeVideo();
           $this->SetTwitter();
           $this->SetInstagram();
           $this->SetFacebook();
           $this->SetGallery();
+          $this->SetCleanStyle(); // Should be last one
 
           $this->InjectBanner();
 
@@ -290,6 +293,15 @@ Class ExameAmp
     $this->SetHtmlBody($content);
   }
 
+
+ private function SetCleanStyle()
+  {
+    // Clean remanescent style in body
+    $content = $this->GetHtmlBody();
+    $regexCleanStyle = 'style=\\"[^\\"]*\\"';
+    $content = preg_replace("#$regexCleanStyle#",'',$content);
+    $this->SetHtmlBody($content);
+  }
 
 
 
