@@ -407,7 +407,7 @@ Class ExameAmp
           <amp-lightbox id="lightbox'.$k.'" class="lightbox1" layout="nodisplay">
           <div class="lightbox1-content">
             <div class="image-credit">'.$midia['creditos'].'</div>
-            <amp-img id="img'.$k.'" src="'.$midia['transformacoes']['590'].'" width="590" height="331" layout="responsive" on="tap:lightbox'.$k.'.close" role="button"></amp-img>
+            <amp-img id="img'.$k.'" tabindex="'.$k.'" src="'.$midia['transformacoes']['590'].'" width="590" height="331" layout="responsive" on="tap:lightbox'.$k.'.close" role="button"></amp-img>
             <div class="image-caption">'.$midia['alt'].'</div>
             '.$midia['corpo'].'
           </div>
