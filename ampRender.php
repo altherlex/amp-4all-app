@@ -1,19 +1,15 @@
 <?php
-if (!isset($argc))
-  {
+if (!isset($argc)){
   //==== Default for web server =============================================================
   $urlToTranslate = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
   $environment = 'PROD';
-  }
-else
-  {
+}else{
   $devMode    = true;
   $debugMode  = false;
   $environment = 'DEV';
+
   if ($argv[2] == "debug")
-    {
       $debugMode = true;
-    }
 
   //==== Dev mode URL's de teste ========================================================================================================
   $urlToTranslate = "amp.exame.abril.com.br/mundo/noticias/florida-declara-emergencia-sanitaria-por-novos-casos-de-zika";
@@ -37,13 +33,15 @@ else
   #=== Facebook =========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/e-uma-das-maiores-descobertas-da-ciencia-diz-zuckerberg";
 
- #=== materia com Galeria ==========================================================================================================================
+  #=== materia com Galeria ==========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
 
- #=== Galeria Photos ==========================================================================================================================
+  #=== Galeria Photos ==========================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br?url=negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville";
 
-  }
+  #=== Com 2 imagens no corpo da materia ==========================================================================================================================
+  $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data";
+}
 
 
 $exameAmp = new ExameAmp($urlToTranslate,$debugMode, $environment);
@@ -59,10 +57,9 @@ Class ExameAmp
 
   public function __construct($url,$debugMode, $environment)
     {
-      if ($environment=="PROD")
-        {
+      if ($environment=="PROD"){
         $templatePath="/opt/abril/googleamp/templates/";
-        }
+      }
       $this->GetUrlInfo($url);
       $this->SetJsonMateria();
       $this->SetContentType();
@@ -276,20 +273,20 @@ Class ExameAmp
     return preg_replace("/<(|\/)p>/","",$this->materiaJson['midias'][0]['legenda']);
   }
 
-  private function SetYoutubeVideo()
+ private function SetYoutubeVideo()
   {
     $content = $this->GetHtmlBody();
     $regexYoutube = '<iframe.*?youtube.com/embed/(.*?)\".*?iframe>';
-    preg_match_all("#$regexYoutube#",$content,$vectYoutube); #-> o # substituiu o / da regex
-    $particleTemplateYoutube = '<amp-youtube data-videoid="<@YOUTUBE-ID>" layout="responsive" width="480" height="270"></amp-youtube>';
-
-    for ($x=0; $x<=count($vectYoutube[0])-1; $x++)
-      {
-        $regexToChange    = $vectYoutube[0][$x];
-        $particleToInject = $particleTemplateYoutube;
-        $particleToInject = preg_replace("/<@YOUTUBE-ID>/",$vectYoutube[1][$x],$particleToInject);
-        $content          = preg_replace("#$regexToChange#",$particleToInject,$content);
-      }
+    preg_match_all("#$regexYoutube#", $content,$vectYoutube); #-> o # substituiu o / da regex
+    $particleTemplateYoutube = file_get_contents('templates/embedded/_youtube.tmpl');
+    // $particleTemplateYoutube2 = '<amp-youtube data-videoid="<@YOUTUBE-ID>" layout="responsive" width="480" height="270"></amp-youtube>';
+    // exit;
+    for ($x=0; $x<=count($vectYoutube[0])-1; $x++){
+      $regexToChange    = $vectYoutube[0][$x];
+      $particleToInject = $particleTemplateYoutube;
+      $particleToInject = preg_replace("/<@YOUTUBE-ID>/", $vectYoutube[1][$x],$particleToInject);
+      $content          = preg_replace("#$regexToChange#", $particleToInject,$content);
+    }
 
     $this->SetHtmlBody($content);
   }
@@ -443,10 +440,9 @@ Class ExameAmp
      $this->SetHtmlBody($content);
    }
 
-  private function Debug()
-  {
-    // print_r($this->contentInfo);
-    // print_r($this->materiaJson['canal']['slug']);
+  private function Debug(){
+    print_r($this->contentInfo);
+    print_r($this->materiaJson['canal']['slug']);
   }
 }
 
