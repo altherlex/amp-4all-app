@@ -1,6 +1,7 @@
 <?php
 if (!isset($argc)){
   //==== Default for web server =============================================================
+  //==== Default for web server =============================================================
   $urlToTranslate = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
   $environment = 'PROD';
 }else{
