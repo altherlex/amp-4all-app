@@ -362,7 +362,7 @@ Class ExameAmp
 
         foreach($apiGalleryContent['midias'] as $k=>$midia){
 
-            $particleTemplateGallery .= '<amp-img src="'.$midia['transformacoes']['590'].'" width="590" height="331" on="tap:lightbox'.$k.'"></amp-img>';
+            $particleTemplateGallery .= '<amp-img tabindex="'.$k.'" role="button" src="'.$midia['transformacoes']['590'].'" width="590" height="331" on="tap:lightbox'.$k.'"></amp-img>';
         }
 
         $particleTemplateGallery .= '</amp-carousel>';
