@@ -49,7 +49,7 @@ ssh t40255@172.16.19.64 -p 5022
 
 [materia com Galeria ](http://amp.exame.abril.com.br/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes#development=1)
 
-[Galeria Photos ](http://amp.exame.abril.com.br/negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville#development=1)
+[Galeria Photos: expeted 404 error](http://amp.exame.abril.com.br/negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville#development=1)
 
 [Com imagem no corpo da materia ](http://amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data#development=1)
   

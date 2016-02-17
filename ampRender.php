@@ -102,7 +102,7 @@ Class ExameAmp
     //exit($url);
     $regexUrl   = '(\.br.*?url=)';
     $url        = preg_replace("/$regexUrl/",".br",$url);
-    $url        = preg_replace("/(http\:\/\/int\.amp\.|int\.amp\.)/","http://exame.",$url);
+    $url        = preg_replace("/(http\:\/\/int\.amp\.|int\.amp\.)/","http://",$url);
     //$url        = preg_replace("/exame\.abril\.com\.br\/ampRender\.php/","exame.abril.com.br",$url);
     $urlInfo    = file_get_contents("http://api.exame.abril.com.br/tipo_de_recurso?url=".$url);
     $this->url  = $url;
