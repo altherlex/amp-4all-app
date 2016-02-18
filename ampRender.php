@@ -45,9 +45,10 @@ if (!isset($argc)){
   #=== Com 2 imagens no corpo da materia ==========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema";
 
+
+
 #=== Autor vazio ====================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br?url=/negocios/noticias/cade-ira-analisar-com-cuidado-compra-do-hsbc-por-bradesco";
-
 
  #=== materia com Galeria ==========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
@@ -150,13 +151,18 @@ Class ExameAmp
     $ampPage = preg_replace("/<@DATE_MODIFIED>/"      ,$this->GetDateModified()   ,$ampPage);
     $ampPage = preg_replace("/<@DATE_MODIFIED-BR>/"   ,$this->GetDateModifiedBR() ,$ampPage);
     
+
     $author = $this->GetAuthor();
 
     //Completa a autoria
-    if (isset($author)){
+    if (!empty($author)){
       $author.= $this->GetNewsAgency();
+    } else {
+      $author = $this->GetNewsAgency(false);
     }
 
+
+    
 
     $ampPage = preg_replace("/<@AUTHOR>/"             ,$author                    ,$ampPage);
 
