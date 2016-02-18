@@ -157,21 +157,14 @@ Class ExameAmp
     //Completa a autoria
     if (!empty($author)){
       $author.= $this->GetNewsAgency();
+      $author_news_article = $this->GetAuthor();
     } else {
       $author = $this->GetNewsAgency(false);
+      $author_news_article = $author;
     }
-
-
     
 
     $ampPage = preg_replace("/<@AUTHOR>/"             ,$author                    ,$ampPage);
-
-    if(!empty($author)){
-      $author_news_article = $this->GetAuthor();
-    } else {
-      $author_news_article = $this->GetNewsAgency(false);
-    }
-
     $ampPage = preg_replace("/<@AUTHOR-NEWS-ARTICLE>/",$author_news_article        ,$ampPage);
     $ampPage = preg_replace("/<@BODY>/"               ,$this->GetHtmlBody()       ,$ampPage);
     $ampPage = preg_replace("/<@URL>/"                ,$this->GetUrlPage()        ,$ampPage);
