@@ -166,7 +166,7 @@ Class ExameAmp
 
     $ampPage = preg_replace("/<@AUTHOR>/"             ,$author                    ,$ampPage);
 
-    if(!empty($this->GetAuthor())){
+    if(!empty($author)){
       $author_news_article = $this->GetAuthor();
     } else {
       $author_news_article = $this->GetNewsAgency(false);
