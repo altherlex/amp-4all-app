@@ -138,6 +138,7 @@ Class ExameAmp
     $this->AdjustHtmlBody();
 
     $ampPage = preg_replace("/<@TITLE>/"              ,$this->GetHtmlTitle()      ,$ampPage);
+    $ampPage = preg_replace("/<@HEADLINE>/"           ,$this->GetHtmlHeadline()   ,$ampPage);
     $ampPage = preg_replace("/<@SUB_TITLE>/"          ,$this->GetHtmlSubTitle()   ,$ampPage);
     $ampPage = preg_replace("/<@DATE_PUBLISHED>/"     ,$this->GetDatePublished()  ,$ampPage);
     $ampPage = preg_replace("/<@DATE_MODIFIED>/"      ,$this->GetDateModified()   ,$ampPage);
@@ -199,6 +200,12 @@ Class ExameAmp
   private function GetHtmlTitle()
   {
     return $this->materiaJson['titulo'];
+  }
+
+  private function GetHtmlHeadline()
+  {
+    $headLine = $this->materiaJson['titulo'];
+    return str_replace('"', "'", $headLine);
   }
 
   private function GetHtmlSubTitle()
