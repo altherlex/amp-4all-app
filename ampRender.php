@@ -45,8 +45,14 @@ if (!isset($argc)){
   #=== Com 2 imagens no corpo da materia ==========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema";
 
+#=== Autor vazio ====================================================================================================================
+  $urlToTranslate = "int.amp.exame.abril.com.br?url=/negocios/noticias/cade-ira-analisar-com-cuidado-compra-do-hsbc-por-bradesco";
+
+
  #=== materia com Galeria ==========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
+
+ 
 
 }
 
@@ -147,14 +153,20 @@ Class ExameAmp
     $author = $this->GetAuthor();
 
     //Completa a autoria
-
     if (isset($author)){
       $author.= $this->GetNewsAgency();
     }
 
 
     $ampPage = preg_replace("/<@AUTHOR>/"             ,$author                    ,$ampPage);
-    $ampPage = preg_replace("/<@AUTHOR-NEWS-ARTICLE>/",$this->GetAuthor()         ,$ampPage);
+
+    if(!empty($this->GetAuthor())){
+      $author_news_article = $this->GetAuthor();
+    } else {
+      $author_news_article = $this->GetNewsAgency(false);
+    }
+
+    $ampPage = preg_replace("/<@AUTHOR-NEWS-ARTICLE>/",$author_news_article        ,$ampPage);
     $ampPage = preg_replace("/<@BODY>/"               ,$this->GetHtmlBody()       ,$ampPage);
     $ampPage = preg_replace("/<@URL>/"                ,$this->GetUrlPage()        ,$ampPage);
     $ampPage = preg_replace("/<@CHANNEL>/"            ,$this->GetChannel()        ,$ampPage);
@@ -244,9 +256,14 @@ Class ExameAmp
     return $this->materiaJson['jornalistas'][0]['nome'];
   }
 
-  private function GetNewsAgency()
+  private function GetNewsAgency($preposition=true)
   {
-    return ", ".$this->materiaJson['fonte']['preposicao']." ".$this->materiaJson['fonte']['nome'];
+    if ($preposition){
+      return ", ".$this->materiaJson['fonte']['preposicao']." ".$this->materiaJson['fonte']['nome'];
+    }
+    else{
+      return $this->materiaJson['fonte']['nome']; 
+    }
   }
 
   private function GetImageTop()
