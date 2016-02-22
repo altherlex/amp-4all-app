@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+red() {
+  echo -e "\033[31m $1\033[0m"
+}
+
+green() {
+  echo -e "\033[0;32m$1\033[0m"
+}
+
+white() {
+  echo -e "\033[0;37m$1\033[0m"
+}
+
+echo -e "-------------------------------------------"
+echo -e "  Installing composer "
+echo -e "-------------------------------------------\n"
+
+php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
+php -r "if (hash('SHA384', file_get_contents('composer-setup.php')) === 'fd26ce67e3b237fffd5e5544b45b0d92c41a4afe3e3f778e942e43ce6be197b9cdc7c251dcde6e2a52297ea269370680') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); }"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+
+green "  ✔  Composer is already installed into AMP app."
+
+
+echo -e "-------------------------------------------"
+echo -e "  Running composer "
+echo -e "-------------------------------------------\n"
+
+php composer.phar install
+php composer.phar update
+
+green "  ✔  Success with all php dependency manager."

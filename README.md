@@ -2,9 +2,14 @@
 
 App responde http://amp.exame.com/:noticias
 
-## App server
 
-[PHP-FPM (FastCGI Process Manager)](http://php-fpm.org/)
+## Comands
+
+#### Run tests
+
+```shell
+bin/phpspec run
+```
 
 ## Links
 
@@ -54,3 +59,8 @@ ssh t40255@172.16.19.64 -p 5022
 [Com imagem no corpo da materia ](http://amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data#development=1)
   
 [Com 2 imagens no corpo da materia ](http://amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema#development=1)
+
+
+## App server
+
+[PHP-FPM (FastCGI Process Manager)](http://php-fpm.org/)
