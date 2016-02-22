@@ -53,6 +53,10 @@ if (!isset($argc)){
  #=== materia com Galeria ==========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
 
+ #=== Imagens sem autor ==========================================================================================================================
+  $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/samsung-apresenta-galaxy-s7-com-tela-que-fica-sempre-ligada";
+
+
  
 
 }
@@ -284,6 +288,8 @@ Class ExameAmp
   private function SetImage(){
     $content = $this->GetHtmlBody();
 
+    //<div class="info-img-articles"> <img align="" alt="Fotos tiradas com Galaxy S7 e iPhone 6s Plus" height="455" src="/assets/images/2016/2/598895/size_810_16_9_fotos-tiradas-com-galaxy-s7-e-iphone-6s-plus.jpg" title="Fotos tiradas com Galaxy S7 e iPhone 6s Plus" width="810" /> <p class="gray" style="width:810px"> Fotos: Samsung comparou foto do S7 com uma tirada com um iPhone 6s Plus</p> </div> 
+
     $regexImage = '<div class=\"info-img-articles\">.*?<p class=\"author\".*?>(.*?)<\/p>.*?<img.*? src=\"(.*?)\".*?\/>.*?<p.*?>(.*?)<\/p>.*?<\/div>';
     preg_match_all("#$regexImage#s", $content,$imageBody);
 
@@ -305,6 +311,32 @@ Class ExameAmp
       $content = preg_replace("#$regexToChange#", $particleTemplateImagem,$content);
       
     }
+
+
+    //Sem o autor
+    $regexImage = '<div class=\"info-img-articles\">.*?<img.*? src=\"(.*?)\".*?\/>.*?<p.*?>(.*?)<\/p>.*?<\/div>';
+    preg_match_all("#$regexImage#s", $content,$imageBody);
+
+    foreach($imageBody[0] as $k=>$v){
+
+      $particleTemplateImagem = file_get_contents('templates/embedded/_imagem_corpo.tmpl');
+
+      if(!preg_match('#size_810#',$imageBody)){
+        
+        $patternsSize = array('size_380_','size_460_','size_590_','size_960_');
+        $imageBody = str_replace($patternsSize,'size_810_',$imageBody);
+
+      }
+      
+      $particleTemplateImagem = preg_replace("/<@IMAGE_CREDIT>/", 'EXAME.com' ,$particleTemplateImagem);
+      $particleTemplateImagem = preg_replace("/<@IMAGE_SRC>/", $imageBody[1][$k] ,$particleTemplateImagem);
+      $particleTemplateImagem = preg_replace("/<@IMAGE_CAPTION>/", $imageBody[2][$k] ,$particleTemplateImagem);
+      $regexToChange = $imageBody[0][$k];
+      $content = preg_replace("#$regexToChange#", $particleTemplateImagem,$content);
+      
+    }
+
+
     
     $this->SetHtmlBody($content);
   }
