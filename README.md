@@ -2,11 +2,8 @@
 
 App responde http://amp.exame.com/:noticias
 
-## App server
 
-[PHP-FPM (FastCGI Process Manager)](http://php-fpm.org/)
-
-## Links
+## Links Uteis
 
 [CI](http://jenkins.googleamp.abrdigital.com.br/view/GoogleAmp/)
 
@@ -54,3 +51,29 @@ ssh t40255@172.16.19.64 -p 5022
 [Com imagem no corpo da materia ](http://amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data#development=1)
   
 [Com 2 imagens no corpo da materia ](http://amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema#development=1)
+
+
+## Composer
+
+* Appying dependency management *
+
+```bash
+php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
+php -r "if (hash('SHA384', file_get_contents('composer-setup.php')) === 'fd26ce67e3b237fffd5e5544b45b0d92c41a4afe3e3f778e942e43ce6be197b9cdc7c251dcde6e2a52297ea269370680') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); }"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+```
+
+* Installing packages  *
+
+```bash
+$ php composer.phar install
+
+//Insert yours plugins into composer.json
+
+$ php composer.phar update
+```
+
+## App server
+
+[PHP-FPM (FastCGI Process Manager)](http://php-fpm.org/)
