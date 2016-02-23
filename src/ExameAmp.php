@@ -114,7 +114,10 @@ Class ExameAmp
 
     //$ampPage = preg_replace("/<@AUTHOR>/"     ,$this->GetUrlPage()      ,$ampPage);
 
-    print($ampPage);
+    // print($ampPage);
+    // $mustache = new Mustache_Engine(array('loader'=> new Mustache_loader_FilesystemLoader('./templates')));
+    $mustache = new Mustache_Engine;
+    print $mustache->render($ampPage, array('planet' => 'Alther'));
   }
 
   private function AdjustHtmlBody(){
@@ -460,5 +463,3 @@ Class ExameAmp
     print_r($this->materiaJson['canal']['slug']);
   }
 }
-
-?>
