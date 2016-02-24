@@ -11,6 +11,10 @@ App responde http://amp.exame.com/:noticias
 
 [eg. API](http://api.exame.abril.com.br/v2/materias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data)
 
+[How use mustache](https://mustache.github.io/mustache.5.html)
+
+[Mustache in PHP](https://github.com/bobthecow/mustache.php/wiki)
+
 
 ## Environments
 
@@ -55,7 +59,7 @@ ssh t40255@172.16.19.64 -p 5022
 
 ## Composer
 
-* Appying dependency management *
+*Appying dependency management*
 
 ```bash
 php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
@@ -64,7 +68,7 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 ```
 
-* Installing packages  *
+*Installing packages*
 
 ```bash
 $ php composer.phar install

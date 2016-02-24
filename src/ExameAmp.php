@@ -1,4 +1,6 @@
 <?php
+require 'vendor/autoload.php';
+
 Class ExameAmp
 {
   private $contentInfo;
@@ -82,15 +84,6 @@ Class ExameAmp
     $ampPage = $this->template;
 
     $this->AdjustHtmlBody();
-
-    $ampPage = preg_replace("/<@TITLE>/"              ,$this->GetHtmlTitle()      ,$ampPage);
-    $ampPage = preg_replace("/<@HEADLINE>/"           ,$this->GetHtmlHeadline()   ,$ampPage);
-    $ampPage = preg_replace("/<@SUB_TITLE>/"          ,$this->GetHtmlSubTitle()   ,$ampPage);
-    $ampPage = preg_replace("/<@DATE_PUBLISHED>/"     ,$this->GetDatePublished()  ,$ampPage);
-    $ampPage = preg_replace("/<@DATE_MODIFIED>/"      ,$this->GetDateModified()   ,$ampPage);
-    $ampPage = preg_replace("/<@DATE_MODIFIED-BR>/"   ,$this->GetDateModifiedBR() ,$ampPage);
-    
-
     $author = $this->GetAuthor();
 
     //Completa a autoria
@@ -102,22 +95,25 @@ Class ExameAmp
       $author_news_article = $author;
     }
     
-
-    $ampPage = preg_replace("/<@AUTHOR>/"             ,$author                    ,$ampPage);
-    $ampPage = preg_replace("/<@AUTHOR-NEWS-ARTICLE>/",$author_news_article        ,$ampPage);
-    $ampPage = preg_replace("/<@BODY>/"               ,$this->GetHtmlBody()       ,$ampPage);
-    $ampPage = preg_replace("/<@URL>/"                ,$this->GetUrlPage()        ,$ampPage);
-    $ampPage = preg_replace("/<@CHANNEL>/"            ,$this->GetChannel()        ,$ampPage);
-    $ampPage = preg_replace("/<@IMAGE_TOP>/"          ,$this->GetImageTop()       ,$ampPage);
-    $ampPage = preg_replace("/<@IMAGE_TOP_CREDIT>/"   ,$this->GetImageTopCredit() ,$ampPage);
-    $ampPage = preg_replace("/<@IMAGE_TOP_LEGEND>/"   ,$this->GetImageTopLegend() ,$ampPage);
-
-    //$ampPage = preg_replace("/<@AUTHOR>/"     ,$this->GetUrlPage()      ,$ampPage);
-
-    // print($ampPage);
-    // $mustache = new Mustache_Engine(array('loader'=> new Mustache_loader_FilesystemLoader('./templates')));
+    $params = Array(
+      "@TITLE" =>             $this->GetHtmlTitle(),
+      "@HEADLINE" =>          $this->GetHtmlHeadline(),
+      "@SUB_TITLE" =>         $this->GetHtmlSubTitle(),
+      "@DATE_PUBLISHED" =>    $this->GetDatePublished(),
+      "@DATE_MODIFIED" =>     $this->GetDateModified(),
+      "@DATE_MODIFIED-BR"=>  $this->GetDateModifiedBR(),
+      "@AUTHOR" =>            $author,
+      "@AUTHOR-NEWS-ARTICLE"=>$author_news_article,
+      "@BODY" =>              $this->GetHtmlBody(),
+      "@URL" =>               $this->GetUrlPage(),
+      "@CHANNEL" =>           $this->GetChannel(),
+      "@IMAGE_TOP" =>         $this->GetImageTop(),
+      "@IMAGE_TOP_CREDIT" =>  $this->GetImageTopCredit(),
+      "@IMAGE_TOP_LEGEND" =>  $this->GetImageTopLegend()
+    );
+    $params = array_merge($this->contentInfo, $this->materiaJson, $params);
     $mustache = new Mustache_Engine;
-    print $mustache->render($ampPage, array('planet' => 'Alther'));
+    print $mustache->render($ampPage, $params);
   }
 
   private function AdjustHtmlBody(){

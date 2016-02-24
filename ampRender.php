@@ -1,9 +1,8 @@
 <?php
-require 'vendor/autoload.php';
-
 include("src/ExameAmp.php");
 
 if (!isset($argc)){
+  error_reporting(0);
   //==== Default for web server =============================================================
   $urlToTranslate = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
   $environment = 'PROD';
@@ -37,27 +36,23 @@ if (!isset($argc)){
   #=== Facebook =========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/e-uma-das-maiores-descobertas-da-ciencia-diz-zuckerberg";
 
- 
-  #=== Galeria Photos ==========================================================================================================================
-  // $urlToTranslate = "int.amp.exame.abril.com.br?url=negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville";
+  // #=== Galeria Photos ==========================================================================================================================
+  // // $urlToTranslate = "int.amp.exame.abril.com.br?url=negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville";
 
-#=== Com imagem no corpo da materia ==========================================================================================================================
-  $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data";
+  // #=== Com imagem no corpo da materia ==========================================================================================================================
+  // $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data";
   
-  
-  #=== Com 2 imagens no corpo da materia ==========================================================================================================================
-  $urlToTranslate = "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema";
+  // #=== Com 2 imagens no corpo da materia ==========================================================================================================================
+  // $urlToTranslate = "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema";
 
+  // #=== Autor vazio ====================================================================================================================
+  // $urlToTranslate = "int.amp.exame.abril.com.br?url=/negocios/noticias/cade-ira-analisar-com-cuidado-compra-do-hsbc-por-bradesco";
 
+  // #=== materia com Galeria ==========================================================================================================================
+  // $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
 
-#=== Autor vazio ====================================================================================================================
-  $urlToTranslate = "int.amp.exame.abril.com.br?url=/negocios/noticias/cade-ira-analisar-com-cuidado-compra-do-hsbc-por-bradesco";
-
- #=== materia com Galeria ==========================================================================================================================
-  $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
-
- #=== Imagens sem autor ==========================================================================================================================
-  $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/samsung-apresenta-galaxy-s7-com-tela-que-fica-sempre-ligada";
+  // #=== Imagens sem autor ==========================================================================================================================
+  // $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/samsung-apresenta-galaxy-s7-com-tela-que-fica-sempre-ligada";
 
 }
 
