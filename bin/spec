@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# Exame-amp: GoogleAmp
+#
+# Alther Alves para.alves[ at ]gmail.com
+# 2016/02
+
+php load-tests.php
