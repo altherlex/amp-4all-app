@@ -1,5 +1,6 @@
 <?php
 require 'vendor/autoload.php';
+include('vendor/simple-html-dom/simple-html-dom/simple_html_dom.php');
 
 Class ExameAmp
 {
@@ -31,6 +32,8 @@ Class ExameAmp
           $this->SetCleanStyle(); // Should be last one
 
           $this->InjectBanner();
+
+          $this->ApplyBlackList();
 
 
           $this->Render();
@@ -81,8 +84,6 @@ Class ExameAmp
 
   private function Render()
   {
-    $ampPage = $this->template;
-
     $this->AdjustHtmlBody();
     $author = $this->GetAuthor();
 
@@ -109,11 +110,15 @@ Class ExameAmp
       "@CHANNEL" =>           $this->GetChannel(),
       "@IMAGE_TOP" =>         $this->GetImageTop(),
       "@IMAGE_TOP_CREDIT" =>  $this->GetImageTopCredit(),
-      "@IMAGE_TOP_LEGEND" =>  $this->GetImageTopLegend()
+      "@IMAGE_TOP_LEGEND" =>  $this->GetImageTopLegend(),
+
+      // 'loader'             => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/templates'),
+      // 'partials_loader'    => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/templates/partials'),
     );
+
     $params = array_merge($this->contentInfo, $this->materiaJson, $params);
     $mustache = new Mustache_Engine;
-    print $mustache->render($ampPage, $params);
+    print $mustache->render($this->template, $params);
   }
 
   private function AdjustHtmlBody(){
@@ -270,31 +275,29 @@ Class ExameAmp
       
     }
 
-
-    
     $this->SetHtmlBody($content);
   }
 
+  private function SetYoutubeVideo(){
+    $m = new Mustache_Engine;
+    $partial = file_get_contents('templates/embedded/_youtube.mustache');
 
+    $body = str_get_html($this->GetHtmlBody());
 
- private function SetYoutubeVideo()
-  {
-    $content = $this->GetHtmlBody();
-    $regexYoutube = '<iframe.*?youtube.com/embed/(.*?)\".*?iframe>';
-    preg_match_all("#$regexYoutube#", $content,$vectYoutube); #-> o # substituiu o / da regex
-    $particleTemplateYoutube = file_get_contents('templates/embedded/_youtube.tmpl');
-    for ($x=0; $x<=count($vectYoutube[0])-1; $x++){
-      $regexToChange    = $vectYoutube[0][$x];
-      $particleToInject = $particleTemplateYoutube;
-      $particleToInject = preg_replace("/<@YOUTUBE-ID>/", $vectYoutube[1][$x],$particleToInject);
-      $content          = preg_replace("#$regexToChange#", $particleToInject,$content);
+    foreach($body->find('iframe') as $element){
+      if (preg_match('/youtube/', $element->src)){
+        $pattern = '/.*?youtube.com\/embed\/(.*?)/s';
+        $element->src = preg_replace($pattern, '', $element->src);
+        $element->src = preg_replace('/\?.*/', '', $element->src);
+        $element->outertext = $m->render($partial, $element);
+      }
     }
 
-    $this->SetHtmlBody($content);
+    $this->SetHtmlBody($body);
   }
 
 
- private function SetCleanStyle()
+  private function SetCleanStyle()
   {
     // Clean remanescent style in body
     $content = $this->GetHtmlBody();
@@ -303,37 +306,32 @@ Class ExameAmp
     $this->SetHtmlBody($content);
   }
 
+  private function ApplyBlackList(){
+    $body = str_get_html($this->GetHtmlBody());
+    $blackList = file_get_contents(dirname(__FILE__) . "/BlackList.json");
+    $blackList = json_decode($blackList,true);
 
+    if (is_null($blackList))
+      trigger_error('Json desconfigurado: src/BlackList.json', E_USER_WARNING);
 
-  private function SetFacebook()
-  {
-    $content = $this->GetHtmlBody();
+    if (!is_null($blackList["tags"]))
+      foreach($blackList["tags"] as $tag)
+        foreach($body->find($tag) as $element)
+          $element->outertext = "";
+    
+    $this->SetHtmlBody($body);
+  }
 
-    #== Clear Facebook JS =====================================================================================================
-    $clearFacebookScript = "<script>\(function.*?facebook.*?facebook.*?>";
-    $content = preg_replace("/$clearFacebookScript/","",$content);
+  private function SetFacebook(){
+    $m = new Mustache_Engine;
+    $partial = file_get_contents('templates/embedded/_facebook.mustache');
 
-    #== Get Facebook ID =======================================================================================================
-    $regerxFbUrl = '<div class.*?fb\-post.*?href.*?\"(.*?)\".*?>';
-    preg_match_all("/$regerxFbUrl/",$content,$vectFacebookUrls);
+    $body = str_get_html($this->GetHtmlBody());
 
-    #== Parse each facebook that exist in the page with the new call to amp facebook ===========================================
-    $facebookTemplate = '<amp-facebook width=486 height=657 layout="responsive" data-href="<@FACEBOOK-URL>"> </amp-facebook>';
-    for ($x=0; $x<=count($vectFacebookUrls[0])-1; $x++)
-      {
-        $regexToChange    = $vectFacebookUrls[0][$x];
-        $particleToInject = $facebookTemplate;
-        $particleToInject = preg_replace("/<@FACEBOOK-URL>/",$vectFacebookUrls[1][$x],$particleToInject);
-        $content          = preg_replace("#$regexToChange#",$particleToInject,$content);
-      }
+    foreach($body->find('div[class=fb-post]') as $element)
+      $element->outertext = $m->render($partial, $element);
 
-    #== Clear FB blockquote =================================================================================================
-    $content = preg_replace("/\r\n+|\r+|\n+|\t+/i","<##QB##>",$content);
-    $regexFlatContent = '<div class.*?fb\-xfbml\-parse\-ignore.*?>.*?<blockquote.*?<\/a><\/blockquote>.*?<##QB##><##QB##><\/div><##QB##><\/div>';
-    $content = preg_replace("/$regexFlatContent/","",$content);
-    $content = preg_replace("/<##QB##>/","\n",$content);
-
-    $this->SetHtmlBody($content);
+    $this->SetHtmlBody($body);
   }
 
   private function SetTwitter()

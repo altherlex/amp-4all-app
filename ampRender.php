@@ -15,23 +15,25 @@ if (!isset($argc)){
       $debugMode = true;
 
   //==== Dev mode URL's de teste ========================================================================================================
-  $urlToTranslate = "amp.exame.abril.com.br/mundo/noticias/florida-declara-emergencia-sanitaria-por-novos-casos-de-zika";
+  // $urlToTranslate = "amp.exame.abril.com.br/mundo/noticias/florida-declara-emergencia-sanitaria-por-novos-casos-de-zika";
 
-  #=== Infograficos =====================================================================================================================
-  $urlToTranslate = "amp.exame.abril.com.br?url=/marketing/noticias/infografico-mostra-como-os-brasileiros-consomem-midia";
+  // #=== Infograficos =====================================================================================================================
+  // $urlToTranslate = "amp.exame.abril.com.br?url=/marketing/noticias/infografico-mostra-como-os-brasileiros-consomem-midia";
 
-  #=== Galeria ==========================================================================================================================
-  $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
+  // #=== Galeria ==========================================================================================================================
+  // $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
 
-  #=== youtube ==========================================================================================================================
-  $urlToTranslate = "int.amp.exame.abril.com.br?url=/tecnologia/noticias/ondas-gravitacionais-previstas-por-einstein-sao-descobertas";
+  // #=== youtube ==========================================================================================================================
+  // $urlToTranslate = "int.amp.exame.abril.com.br?url=/tecnologia/noticias/ondas-gravitacionais-previstas-por-einstein-sao-descobertas";
 
+  // #=== youtube-2 ==========================================================================================================================
+  // $urlToTranslate = "amp.exame.abril.com.br/brasil/noticias/5-revelacoes-curiosas-sobre-a-prisao-de-lula-na-ditadura";
 
-  #=== Twitter ==========================================================================================================================
-  $urlToTranslate = "int.exame.abril.com.br/negocios/noticias/ceo-do-twitter-doa-parte-de-suas-acoes-aos-seus-funcionarios";
+  // #=== Twitter ==========================================================================================================================
+  // $urlToTranslate = "int.exame.abril.com.br/negocios/noticias/ceo-do-twitter-doa-parte-de-suas-acoes-aos-seus-funcionarios";
 
-  #=== Instagram ==========================================================================================================================
-  $urlToTranslate = "int.exame.abril.com.br/marketing/noticias/estilista-marc-jacobs-procura-por-modelos-no-instagram";
+  // #=== Instagram ==========================================================================================================================
+  // $urlToTranslate = "int.exame.abril.com.br/marketing/noticias/estilista-marc-jacobs-procura-por-modelos-no-instagram";
 
   #=== Facebook =========================================================================================================================
   $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/e-uma-das-maiores-descobertas-da-ciencia-diz-zuckerberg";
@@ -53,7 +55,6 @@ if (!isset($argc)){
 
   // #=== Imagens sem autor ==========================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/samsung-apresenta-galaxy-s7-com-tela-que-fica-sempre-ligada";
-
 }
 
 $exameAmp = new ExameAmp($urlToTranslate,$debugMode, $environment);

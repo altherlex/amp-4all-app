@@ -1,5 +1,10 @@
 {
   "require": {
-    "mustache/mustache": "~2.5"
-  }
+    "mustache/mustache": "~2.5",
+    "simple-html-dom/simple-html-dom": "*"
+  },
+  "repositories": [{
+    "type": "vcs",
+    "url": "https://github.com/Youpie/simple-html-dom"
+  }]
 }
