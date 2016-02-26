@@ -33,6 +33,8 @@ Class ExameAmp
 
           $this->InjectBanner();
 
+          $this->ApplyBlackList();
+
 
           $this->Render();
           if ($debugMode){$this->Debug();}
@@ -294,7 +296,7 @@ Class ExameAmp
   }
 
 
- private function SetCleanStyle()
+  private function SetCleanStyle()
   {
     // Clean remanescent style in body
     $content = $this->GetHtmlBody();
@@ -303,35 +305,32 @@ Class ExameAmp
     $this->SetHtmlBody($content);
   }
 
-  private function SetFacebook()
-  {
-    $content = $this->GetHtmlBody();
+  private function ApplyBlackList(){
+    $body = str_get_html($this->GetHtmlBody());
+    $blackList = file_get_contents(dirname(__FILE__) . "/BlackList.json");
+    $blackList = json_decode($blackList,true);
 
-    #== Clear Facebook JS =====================================================================================================
-    $clearFacebookScript = "<script>\(function.*?facebook.*?facebook.*?>";
-    $content = preg_replace("/$clearFacebookScript/","",$content);
+    if (is_null($blackList))
+      trigger_error('Json desconfigurado: src/BlackList.json', E_USER_WARNING);
 
-    #== Get Facebook ID =======================================================================================================
-    $regerxFbUrl = '<div class.*?fb\-post.*?href.*?\"(.*?)\".*?>';
-    preg_match_all("/$regerxFbUrl/",$content,$vectFacebookUrls);
+    if (!is_null($blackList["tags"]))
+      foreach($blackList["tags"] as $tag)
+        foreach($body->find($tag) as $element)
+          $element->outertext = "";
+    
+    $this->SetHtmlBody($body);
+  }
 
-    #== Parse each facebook that exist in the page with the new call to amp facebook ===========================================
-    $facebookTemplate = '<amp-facebook width=486 height=657 layout="responsive" data-href="<@FACEBOOK-URL>"> </amp-facebook>';
-    for ($x=0; $x<=count($vectFacebookUrls[0])-1; $x++)
-      {
-        $regexToChange    = $vectFacebookUrls[0][$x];
-        $particleToInject = $facebookTemplate;
-        $particleToInject = preg_replace("/<@FACEBOOK-URL>/",$vectFacebookUrls[1][$x],$particleToInject);
-        $content          = preg_replace("#$regexToChange#",$particleToInject,$content);
-      }
+  private function SetFacebook(){
+    $m = new Mustache_Engine;
+    $partial = file_get_contents('templates/embedded/_facebook.mustache');
 
-    #== Clear FB blockquote =================================================================================================
-    $content = preg_replace("/\r\n+|\r+|\n+|\t+/i","<##QB##>",$content);
-    $regexFlatContent = '<div class.*?fb\-xfbml\-parse\-ignore.*?>.*?<blockquote.*?<\/a><\/blockquote>.*?<##QB##><##QB##><\/div><##QB##><\/div>';
-    $content = preg_replace("/$regexFlatContent/","",$content);
-    $content = preg_replace("/<##QB##>/","\n",$content);
+    $body = str_get_html($this->GetHtmlBody());
 
-    $this->SetHtmlBody($content);
+    foreach($body->find('div[class=fb-post]') as $element)
+      $element->outertext = $m->render($partial, $element);
+
+    $this->SetHtmlBody($body);
   }
 
   private function SetTwitter()
