@@ -55,6 +55,8 @@ getent passwd %{username} > /dev/null || \
 exit 0
 
 %post
+echo "restarting php-fpm"
+service php-fpm restart
 
 %postun
 
