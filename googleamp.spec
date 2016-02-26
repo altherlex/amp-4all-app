@@ -21,6 +21,8 @@ Packager: Daniel Faria <daniel.faria@abril.com.br>
 Buildroot: %{_tmppath}/%{name}-%{version}-root
 AutoReqProv: no
 
+Requires: php-mbstring
+
 %define appdir /opt/abril/%{name}
 %define username googleamp
 %define groupname googleamp
@@ -28,7 +30,7 @@ AutoReqProv: no
 %define groupid 1000
 
 %description
-Novo PubliAbril
+Google Amp
 
 %prep
 %setup -q
@@ -39,7 +41,6 @@ Novo PubliAbril
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/opt/abril
 mkdir -p $RPM_BUILD_ROOT/etc/logrotate.d
-
 
 cp -a $RPM_BUILD_DIR/%{name}-%{version} $RPM_BUILD_ROOT%{appdir}
 rm -f $RPM_BUILD_ROOT%{appdir}/%{name}.spec
