@@ -286,8 +286,9 @@ Class ExameAmp
 
     foreach($body->find('iframe') as $element){
       if (preg_match('/youtube/', $element->src)){
-        $youtube_id = str_replace("https://www.youtube.com/embed/", "", $element->src);
-        $element->src = $youtube_id;
+        $pattern = '/.*?youtube.com\/embed\/(.*?)/s';
+        $element->src = preg_replace($pattern, '', $element->src);
+        $element->src = preg_replace('/\?.*/', '', $element->src);
         $element->outertext = $m->render($partial, $element);
       }
     }
