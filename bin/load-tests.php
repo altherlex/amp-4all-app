@@ -1,5 +1,4 @@
 <?php
-# php bin/load-tests.php -v=latest
 require("src/ExameAmp.php");
 
 $debugMode  = false;

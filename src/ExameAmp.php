@@ -1,5 +1,6 @@
 <?php
 require 'vendor/autoload.php';
+include('vendor/simple-html-dom/simple-html-dom/simple_html_dom.php');
 
 Class ExameAmp
 {
@@ -81,8 +82,6 @@ Class ExameAmp
 
   private function Render()
   {
-    $ampPage = $this->template;
-
     $this->AdjustHtmlBody();
     $author = $this->GetAuthor();
 
@@ -109,11 +108,15 @@ Class ExameAmp
       "@CHANNEL" =>           $this->GetChannel(),
       "@IMAGE_TOP" =>         $this->GetImageTop(),
       "@IMAGE_TOP_CREDIT" =>  $this->GetImageTopCredit(),
-      "@IMAGE_TOP_LEGEND" =>  $this->GetImageTopLegend()
+      "@IMAGE_TOP_LEGEND" =>  $this->GetImageTopLegend(),
+
+      // 'loader'             => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/templates'),
+      // 'partials_loader'    => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/templates/partials'),
     );
+
     $params = array_merge($this->contentInfo, $this->materiaJson, $params);
     $mustache = new Mustache_Engine;
-    print $mustache->render($ampPage, $params);
+    print $mustache->render($this->template, $params);
   }
 
   private function AdjustHtmlBody(){
@@ -270,27 +273,24 @@ Class ExameAmp
       
     }
 
-
-    
     $this->SetHtmlBody($content);
   }
 
+  private function SetYoutubeVideo(){
+    $m = new Mustache_Engine;
+    $partial = file_get_contents('templates/embedded/_youtube.mustache');
 
+    $body = str_get_html($this->GetHtmlBody());
 
- private function SetYoutubeVideo()
-  {
-    $content = $this->GetHtmlBody();
-    $regexYoutube = '<iframe.*?youtube.com/embed/(.*?)\".*?iframe>';
-    preg_match_all("#$regexYoutube#", $content,$vectYoutube); #-> o # substituiu o / da regex
-    $particleTemplateYoutube = file_get_contents('templates/embedded/_youtube.tmpl');
-    for ($x=0; $x<=count($vectYoutube[0])-1; $x++){
-      $regexToChange    = $vectYoutube[0][$x];
-      $particleToInject = $particleTemplateYoutube;
-      $particleToInject = preg_replace("/<@YOUTUBE-ID>/", $vectYoutube[1][$x],$particleToInject);
-      $content          = preg_replace("#$regexToChange#", $particleToInject,$content);
+    foreach($body->find('iframe') as $element){
+      if (preg_match('/youtube/', $element->src)){
+        $youtube_id = str_replace("https://www.youtube.com/embed/", "", $element->src);
+        $element->src = $youtube_id;
+        $element->outertext = $m->render($partial, $element);
+      }
     }
 
-    $this->SetHtmlBody($content);
+    $this->SetHtmlBody($body);
   }
 
 
@@ -302,8 +302,6 @@ Class ExameAmp
     $content = preg_replace("#$regexCleanStyle#",'',$content);
     $this->SetHtmlBody($content);
   }
-
-
 
   private function SetFacebook()
   {

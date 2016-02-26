@@ -5,4 +5,4 @@
 # Alther Alves para.alves[ at ]gmail.com
 # 2016/02
 
-php load-tests.php
+php bin/load-tests.php -v=latest

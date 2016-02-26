@@ -17,6 +17,16 @@ App responde http://amp.exame.com/:noticias
 
 [Mustache in PHP](https://github.com/bobthecow/mustache.php/wiki)
 
+### Parser HTML
+
+[SimpleHTMLdom](http://simplehtmldom.sourceforge.net/manual.htm)
+[SimpleHTMLdom for composer](https://github.com/miclf/simple-html-dom)
+
+```
+TODO
+
+Remove tag from blacklist with SimpleHTMLdom
+```
 
 ## Environments
 
