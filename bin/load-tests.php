@@ -13,12 +13,13 @@ $params = Array(
   "twitter"=> "int.exame.abril.com.br/negocios/noticias/ceo-do-twitter-doa-parte-de-suas-acoes-aos-seus-funcionarios",
   "instagram"=> "int.exame.abril.com.br/marketing/noticias/estilista-marc-jacobs-procura-por-modelos-no-instagram",
   "facebook"=> "int.amp.exame.abril.com.br/tecnologia/noticias/e-uma-das-maiores-descobertas-da-ciencia-diz-zuckerberg",
-  "galeria photos"=> "int.amp.exame.abril.com.br?url=negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville",
   "imagem_na_materia"=> "int.amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data",
   "duas_imagens_materia"=> "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema",
   "autor_vazio"=> "int.amp.exame.abril.com.br?url=/negocios/noticias/cade-ira-analisar-com-cuidado-compra-do-hsbc-por-bradesco",
-  "materia_com_galeria"=> "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes",
-  "imagens_sem_autor"=> "int.amp.exame.abril.com.br/tecnologia/noticias/samsung-apresenta-galaxy-s7-com-tela-que-fica-sempre-ligada"
+  "com_galeria_multimidia"=> "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes",
+  "com_galeria_de_fotos"=> "int.amp.exame.abril.com.br?url=/brasil/noticias/alckmin-anuncia-medidas-para-enfrentar-crise-hidrica-em-sao-paulo-2",
+  "imagens_sem_autor"=> "int.amp.exame.abril.com.br/tecnologia/noticias/samsung-apresenta-galaxy-s7-com-tela-que-fica-sempre-ligada",
+  "galeria_photos"=> "int.amp.exame.abril.com.br?url=negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville"
 );
 
 $tag_version = getopt('v:');

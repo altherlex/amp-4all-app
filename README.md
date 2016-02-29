@@ -22,10 +22,11 @@ App responde http://amp.exame.com/:noticias
 [SimpleHTMLdom](http://simplehtmldom.sourceforge.net/manual.htm)
 [SimpleHTMLdom for composer](https://github.com/miclf/simple-html-dom)
 
-```
-TODO
+*Required*
 
-Remove tag from blacklist with SimpleHTMLdom
+```bash
+#http://stackoverflow.com/questions/10278561/how-to-install-php-mbstring-on-centos-6-2
+yum install php-mbstring
 ```
 
 ## Environments

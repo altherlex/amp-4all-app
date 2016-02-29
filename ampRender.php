@@ -36,7 +36,7 @@ if (!isset($argc)){
   // $urlToTranslate = "int.exame.abril.com.br/marketing/noticias/estilista-marc-jacobs-procura-por-modelos-no-instagram";
 
   #=== Facebook =========================================================================================================================
-  $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/e-uma-das-maiores-descobertas-da-ciencia-diz-zuckerberg";
+  // $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/e-uma-das-maiores-descobertas-da-ciencia-diz-zuckerberg";
 
   // #=== Galeria Photos ==========================================================================================================================
   // // $urlToTranslate = "int.amp.exame.abril.com.br?url=negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville";
@@ -52,6 +52,9 @@ if (!isset($argc)){
 
   // #=== materia com Galeria ==========================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
+
+  // #=== materia com tipo_recurso == galeria de fotos ==========================================================================================================================
+  $urlToTranslate = "int.amp.exame.abril.com.br?url=/brasil/noticias/alckmin-anuncia-medidas-para-enfrentar-crise-hidrica-em-sao-paulo-2";
 
   // #=== Imagens sem autor ==========================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/samsung-apresenta-galaxy-s7-com-tela-que-fica-sempre-ligada";

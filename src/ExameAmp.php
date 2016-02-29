@@ -376,60 +376,28 @@ Class ExameAmp
      $this->SetHtmlBody($content);
    }
 
+  private function SetGallery(){
+    $m = new Mustache_Engine;
+    $partial = file_get_contents('templates/embedded/_galeria_multimidia.mustache');
 
-//<p>.*?<conteudo slug="(.*?)\" tipo_recurso=\"(.*?)\".*?\/><\/p>
+    $body = str_get_html($this->GetHtmlBody());
 
-  private function SetGallery()
-   {
+    foreach($body->find('conteudo') as $element)
+      switch ($element->tipo_recurso){
+        case 'galeria multimidia':
+          $apiGallery = file_get_contents('http://api.exame.abril.com.br/v2/materias/'.$element->slug);
+          $apiGallery = json_decode($apiGallery,true);
+          $element->outertext = $m->render($partial, $apiGallery);
+          break;
+        case 'galeria de fotos':
+          $apiGallery = file_get_contents('http://api.exame.abril.com.br/v2/album-de-fotos/'.$element->slug);
+          $apiGallery = json_decode($apiGallery,true);
+          $element->outertext = $m->render($partial, $apiGallery);
+          break;
+      }
 
-
-     $content = $this->GetHtmlBody();
-
-     $regexGallery = '<conteudo slug="(.*?)\" tipo_recurso=\"(.*?)\".*?\/>';
-     //'<blockquote class=\"twitter.*?status\/(.*?)\">.*?<\/blockquote>';
-
-     preg_match_all("#$regexGallery#m",$content,$vectGallery); #->o # substituiu o / da regex
-
-     if ($vectGallery[2][0] === "galeria multimidia"){
-
-
-        $apiGallery = file_get_contents('http://api.exame.abril.com.br/v2/materias/'.$vectGallery[1][0]);
-        $apiGalleryContent = json_decode($apiGallery,true);
-
-        //Gallery
-        $particleTemplateGallery = '<div class="gallery"><h2>'.$apiGalleryContent['titulo'].'</h2><amp-carousel width="auto" height="331">';
-
-        foreach($apiGalleryContent['midias'] as $k=>$midia){
-
-            $particleTemplateGallery .= '<amp-img tabindex="'.$k.'" role="button" src="'.$midia['transformacoes']['590'].'" width="590" height="331" on="tap:lightbox'.$k.'"></amp-img>';
-        }
-
-        $particleTemplateGallery .= '</amp-carousel>';
-
-
-        //Lightbox
-        foreach($apiGalleryContent['midias'] as $k=>$midia){
-
-          $midia['corpo'] = strip_tags($midia['corpo'], '<p><a>');
-
-          $particleTemplateGallery .= '
-          <amp-lightbox id="lightbox'.$k.'" class="lightbox1" layout="nodisplay">
-          <div class="lightbox1-content">
-            <div class="image-credit">'.$midia['creditos'].'</div>
-            <amp-img id="img'.$k.'" tabindex="'.$k.'" src="'.$midia['transformacoes']['590'].'" width="590" height="331" layout="responsive" on="tap:lightbox'.$k.'.close" role="button"></amp-img>
-            <div class="image-caption">'.$midia['alt'].'</div>
-            '.$midia['corpo'].'
-          </div>
-        </amp-lightbox>';
-        }
-
-        $particleTemplateGallery .= '</div>';
-
-
-        $content = str_replace($vectGallery[0][0],$particleTemplateGallery,$content);
-        $this->SetHtmlBody($content);
-     }
-   }
+    $this->SetHtmlBody($body);
+  }
 
    private function InjectBanner()
    {
