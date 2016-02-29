@@ -25,6 +25,7 @@ Class ExameAmp
 
           $this->SetImage();
           $this->SetYoutubeVideo();
+          $this->SetScribd();
           $this->SetTwitter();
           $this->SetInstagram();
           $this->SetFacebook();
@@ -295,6 +296,19 @@ Class ExameAmp
     $this->SetHtmlBody($body);
   }
 
+  private function SetScribd(){
+    $m = new Mustache_Engine;
+    $partial = file_get_contents('templates/embedded/_scribd.mustache');
+
+    $body = str_get_html($this->GetHtmlBody());
+
+    foreach($body->find('iframe') as $element){
+      if (preg_match('/scribd/', $element->src))
+        $element->outertext = $m->render($partial, $element);
+    }
+
+    $this->SetHtmlBody($body);
+  }
 
   private function SetCleanStyle()
   {

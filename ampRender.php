@@ -51,7 +51,10 @@ if (!isset($argc)){
   // $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data";
   
   // #=== Com 2 imagens no corpo da materia ==========================================================================================================================
-  $urlToTranslate = "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema";
+  // $urlToTranslate = "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema";
+
+  // #=== Scribd ==========================================================================================================================
+  $urlToTranslate = "amp.exame.abril.com.br/carreira/noticias/teste-conhecimentos-de-atualidades-com-o-simulado-da-lfg";
 
   // #=== Autor vazio ====================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br?url=/negocios/noticias/cade-ira-analisar-com-cuidado-compra-do-hsbc-por-bradesco";
