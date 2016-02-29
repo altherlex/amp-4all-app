@@ -2,6 +2,24 @@
   "tags": [
     "script",
     "div[class=fb-xfbml-parse-ignore]",
-    "div[class=fb-post]"
+    "div[class=fb-post]",
+    "script",
+    "base",
+    "img",
+    "video",
+    "audio",
+    "iframe",
+    "frame",
+    "frameset",
+    "object",
+    "param",
+    "applet",
+    "embed",
+    "form",
+    "input",
+    "button",
+    "style",
+    "meta",
+    "svg"
   ]
 }

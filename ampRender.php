@@ -54,7 +54,7 @@ if (!isset($argc)){
   // $urlToTranslate = "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema";
 
   // #=== Scribd ==========================================================================================================================
-  $urlToTranslate = "amp.exame.abril.com.br/carreira/noticias/teste-conhecimentos-de-atualidades-com-o-simulado-da-lfg";
+  // $urlToTranslate = "amp.exame.abril.com.br/carreira/noticias/teste-conhecimentos-de-atualidades-com-o-simulado-da-lfg";
 
   // #=== Autor vazio ====================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br?url=/negocios/noticias/cade-ira-analisar-com-cuidado-compra-do-hsbc-por-bradesco";
@@ -67,6 +67,9 @@ if (!isset($argc)){
 
   // #=== Imagens sem autor ==========================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/samsung-apresenta-galaxy-s7-com-tela-que-fica-sempre-ligada";
+
+  // #=== Sambatech ==========================================================================================================================
+  $urlToTranslate = "amp.exame.abril.com.br/seu-dinheiro/noticias/como-declarar-venda-e-doacao-de-imoveis-no-imposto-de-renda";
 }
 
 $exameAmp = new ExameAmp($urlToTranslate,$debugMode, $environment);

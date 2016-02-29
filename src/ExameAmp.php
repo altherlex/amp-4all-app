@@ -280,7 +280,8 @@ Class ExameAmp
 
   private function SetYoutubeVideo(){
     $m = new Mustache_Engine;
-    $partial = file_get_contents('templates/embedded/_youtube.mustache');
+    $partial_youtube = file_get_contents('templates/embedded/_youtube.mustache');
+    $partial_video = file_get_contents('templates/embedded/_video.mustache');
 
     $body = str_get_html($this->GetHtmlBody());
 
@@ -289,7 +290,9 @@ Class ExameAmp
         $pattern = '/.*?youtube.com\/embed\/(.*?)/s';
         $element->src = preg_replace($pattern, '', $element->src);
         $element->src = preg_replace('/\?.*/', '', $element->src);
-        $element->outertext = $m->render($partial, $element);
+        $element->outertext = $m->render($partial_youtube, $element);
+      }elseif (preg_match('/videos.abril/', $element->src)) {
+        $element->outertext = $m->render($partial_video, $element);
       }
     }
 
