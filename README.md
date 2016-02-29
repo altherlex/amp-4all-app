@@ -13,6 +13,15 @@ App responde http://amp.exame.com/:noticias
 
 [Documentation Picture Galleries (tipo recurso é galeria de fotos)](http://api.exame.abril.com.br/documentation-v2.html)
 
+*eg. api recurso galeria de fotos*
+
+# [eg. api recurso galeria de fotos](http://api.exame.abril.com.br/v2/album-de-fotos/os-grandes-numeros-da-falta-de-agua-em-sao-paulo)
+
+# [eg. api root](http://api.exame.abril.com.br/v2/materias/alckmin-anuncia-medidas-para-enfrentar-crise-hidrica-em-sao-paulo-2)
+
+
+[eg. api recurso galeria multimidia](http://api.exame.abril.com.br/v2/materias/por-dentro-da-sede-da-cvc-em-santo-andre)
+
 ### Mustache (logic-less template engine)
 
 [How use mustache](https://mustache.github.io/mustache.5.html)
