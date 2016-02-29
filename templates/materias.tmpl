@@ -63,14 +63,16 @@
         </li>
         </ul>
     </div>
-    <div class=image-credit>{{ @IMAGE_TOP_CREDIT }}</div>
-    <amp-img src="{{ @IMAGE_TOP }}" width=590 height=331 layout=responsive class=image></amp-img>
-    <div class=image-caption>{{{ @IMAGE_TOP_LEGEND }}}</div>
+    {{# @IMAGE_TOP }}
+      <div>
+        <div class=image-credit>{{ @IMAGE_TOP_CREDIT }}</div>
+        <amp-img src="{{ @IMAGE_TOP }}" width=590 height=331 layout=responsive class=image></amp-img>
+        <div class=image-caption>{{{ @IMAGE_TOP_LEGEND }}}</div>
+      </div>
+    {{/ @IMAGE_TOP }}
     <div class=article__body>
       {{{ @BODY }}}
     </div>
-    <div class=gallery></div>
-    <p>&nbsp;</p>
     <amp-analytics type="googleanalytics" id="conta-abril">
       <script type="application/json">
       {
