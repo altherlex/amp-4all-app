@@ -82,8 +82,7 @@ Class ExameAmp
   }
 
 
-  private function Render()
-  {
+  private function Render(){
     $this->AdjustHtmlBody();
     $author = $this->GetAuthor();
 

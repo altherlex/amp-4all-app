@@ -29,6 +29,12 @@ if (!isset($argc)){
   // #=== youtube-2 ==========================================================================================================================
   // $urlToTranslate = "amp.exame.abril.com.br/brasil/noticias/5-revelacoes-curiosas-sobre-a-prisao-de-lula-na-ditadura";
 
+  // #=== youtube-3 ==========================================================================================================================
+  // $urlToTranslate = "amp.exame.abril.com.br/seu-dinheiro/noticias/calculadora-mostra-retorno-de-investimentos-atrelados-ao-cdi";
+
+  // #=== No img top  ==========================================================================================================================
+  // $urlToTranslate = "amp.exame.abril.com.br/revista-exame/edicoes/793/noticias/marcacao-cerrada-m0050482";
+
   // #=== Twitter ==========================================================================================================================
   // $urlToTranslate = "int.exame.abril.com.br/negocios/noticias/ceo-do-twitter-doa-parte-de-suas-acoes-aos-seus-funcionarios";
 
@@ -45,7 +51,7 @@ if (!isset($argc)){
   // $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data";
   
   // #=== Com 2 imagens no corpo da materia ==========================================================================================================================
-  // $urlToTranslate = "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema";
+  $urlToTranslate = "int.amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema";
 
   // #=== Autor vazio ====================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br?url=/negocios/noticias/cade-ira-analisar-com-cuidado-compra-do-hsbc-por-bradesco";
@@ -54,7 +60,7 @@ if (!isset($argc)){
   // $urlToTranslate = "int.amp.exame.abril.com.br?url=/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes";
 
   // #=== materia com tipo_recurso == galeria de fotos ==========================================================================================================================
-  $urlToTranslate = "int.amp.exame.abril.com.br?url=/brasil/noticias/alckmin-anuncia-medidas-para-enfrentar-crise-hidrica-em-sao-paulo-2";
+  // $urlToTranslate = "int.amp.exame.abril.com.br?url=/brasil/noticias/alckmin-anuncia-medidas-para-enfrentar-crise-hidrica-em-sao-paulo-2";
 
   // #=== Imagens sem autor ==========================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/samsung-apresenta-galaxy-s7-com-tela-que-fica-sempre-ligada";

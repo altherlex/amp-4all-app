@@ -78,11 +78,11 @@ ssh t40255@172.16.19.64 -p 5022
 
 [2 imagens no corpo da materia](http://amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema#development=1)
 
-[autor_vazio](http://amp.exame.abril.com.br?url=/negocios/noticias/cade-ira-analisar-com-cuidado-compra-do-hsbc-por-bradesco#development=1)
+[autor_vazio](http://amp.exame.abril.com.br/negocios/noticias/cade-ira-analisar-com-cuidado-compra-do-hsbc-por-bradesco#development=1)
 
 [materia com Galeria Multimidia](http://amp.exame.abril.com.br/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes#development=1)
 
-[materia com Galeria de fotos](http://amp.exame.abril.com.br?url=/brasil/noticias/alckmin-anuncia-medidas-para-enfrentar-crise-hidrica-em-sao-paulo-2#development=1)
+[materia com Galeria de fotos](http://amp.exame.abril.com.br/brasil/noticias/alckmin-anuncia-medidas-para-enfrentar-crise-hidrica-em-sao-paulo-2#development=1)
 
 [Imagens_sem_autor](http://amp.exame.abril.com.br/tecnologia/noticias/samsung-apresenta-galaxy-s7-com-tela-que-fica-sempre-ligada#development=1)
 
