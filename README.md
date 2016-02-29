@@ -11,6 +11,8 @@ App responde http://amp.exame.com/:noticias
 
 [eg. API](http://api.exame.abril.com.br/v2/materias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data)
 
+[Documentation Picture Galleries (tipo recurso é galeria de fotos)](http://api.exame.abril.com.br/documentation-v2.html)
+
 ### Mustache (logic-less template engine)
 
 [How use mustache](https://mustache.github.io/mustache.5.html)
@@ -55,20 +57,27 @@ ssh t40255@172.16.19.64 -p 5022
 
 [youtube ](http://amp.exame.abril.com.br/tecnologia/noticias/ondas-gravitacionais-previstas-por-einstein-sao-descobertas#development=1)
 
+[youtube 2](http://amp.exame.abril.com.br/brasil/noticias/5-revelacoes-curiosas-sobre-a-prisao-de-lula-na-ditadura#development=1)
+
 [Twitter ](http://amp.exame.abril.com.br/negocios/noticias/ceo-do-twitter-doa-parte-de-suas-acoes-aos-seus-funcionarios#development=1)
 
 [Instagram ](http://amp.exame.abril.com.br/marketing/noticias/estilista-marc-jacobs-procura-por-modelos-no-instagram#development=1)
 
 [Facebook ](http://amp.exame.abril.com.br/tecnologia/noticias/e-uma-das-maiores-descobertas-da-ciencia-diz-zuckerberg#development=1)
 
-[materia com Galeria ](http://amp.exame.abril.com.br/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes#development=1)
+[Imagem no corpo da materia](http://amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data#development=1)
+
+[2 imagens no corpo da materia](http://amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema#development=1)
+
+[autor_vazio](http://amp.exame.abril.com.br?url=/negocios/noticias/cade-ira-analisar-com-cuidado-compra-do-hsbc-por-bradesco#development=1)
+
+[materia com Galeria Multimidia](http://amp.exame.abril.com.br/marketing/noticias/cvc-dara-10-anos-de-ferias-gratis-para-10-clientes#development=1)
+
+[materia com Galeria de fotos](http://amp.exame.abril.com.br?url=/brasil/noticias/alckmin-anuncia-medidas-para-enfrentar-crise-hidrica-em-sao-paulo-2#development=1)
+
+[Imagens_sem_autor](http://amp.exame.abril.com.br/tecnologia/noticias/samsung-apresenta-galaxy-s7-com-tela-que-fica-sempre-ligada#development=1)
 
 [Galeria Photos: expeted 404 error](http://amp.exame.abril.com.br/negocios/noticias/por-dentro-da-nova-sede-da-hp-inc-em-alphaville#development=1)
-
-[Com imagem no corpo da materia ](http://amp.exame.abril.com.br/tecnologia/noticias/voce-pode-quebrar-seu-iphone-simplesmente-trocando-sua-data#development=1)
-  
-[Com 2 imagens no corpo da materia ](http://amp.exame.abril.com.br/revista-exame/edicoes/1105/noticias/para-a-rumo-a-all-e-trem-chamado-problema#development=1)
-
 
 ## Composer
 
