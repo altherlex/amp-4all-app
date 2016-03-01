@@ -13,7 +13,12 @@
       "headline": "{{ @HEADLINE }}",
       "datePublished": "{{ @DATE_PUBLISHED }}",
       "dateModified": "{{ @DATE_MODIFIED }}",
-      "image": { "@type": "ImageObject", "url": "{{ @IMAGE_TOP }}", "width": 810, "height": 460 },
+      {{# @IMAGE_TOP }}
+        "image": { "@type": "ImageObject", "url": "{{ @IMAGE_TOP }}", "width": 810, "height": 460 },
+      {{/ @IMAGE_TOP }}
+      {{^ @IMAGE_TOP }}
+        "image": { "@type": "ImageObject", "url": "http://exame.abril.com.br/v2014/img/logo/logo-exame-1500x844.jpg", "width": 719, "height": 405 },
+      {{/ @IMAGE_TOP }}
       "author": {
         "@type": "Person",
         "name": "{{ @AUTHOR-NEWS-ARTICLE }}"
@@ -71,6 +76,14 @@
         <div class=image-caption>{{{ @IMAGE_TOP_LEGEND }}}</div>
       </div>
     {{/ @IMAGE_TOP }}
+    {{^ @IMAGE_TOP }}
+      <div>
+        <div class=image-credit>{{ @IMAGE_TOP_CREDIT }}</div>
+        <amp-img src="http://exame.abril.com.br/v2014/img/logo/logo-exame-1500x844.jpg" width=590 height=331 layout=responsive class=image></amp-img>
+        <div class=image-caption>{{{ @IMAGE_TOP_LEGEND }}}</div>
+      </div>
+    {{/ @IMAGE_TOP }}
+
     <div class=article__body>
       {{{ @BODY }}}
     </div>
