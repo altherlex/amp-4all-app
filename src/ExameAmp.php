@@ -330,10 +330,17 @@ Class ExameAmp
     if (is_null($blackList))
       trigger_error('Json desconfigurado: src/BlackList.json', E_USER_WARNING);
 
+    // PROHIBITED TAGS
     if (!is_null($blackList["tags"]))
       foreach($blackList["tags"] as $tag)
         foreach($body->find($tag) as $element)
           $element->outertext = "";
+    
+    // STRIPED TAGS
+    if (!is_null($blackList["strip_tags"]))
+      foreach($blackList["strip_tags"] as $tag)
+        foreach($body->find($tag) as $element)
+          $element->outertext = $element->plaintext;
     
     $this->SetHtmlBody($body);
   }

@@ -20,6 +20,11 @@
     "button",
     "style",
     "meta",
-    "svg"
+    "svg",
+    "conteudo"
+  ],
+  "strip_tags":[
+    "font",
+    "bbdc4\\.sa"
   ]
 }
