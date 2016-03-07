@@ -69,7 +69,10 @@ if (!isset($argc)){
   // $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/samsung-apresenta-galaxy-s7-com-tela-que-fica-sempre-ligada";
 
   // #=== Sambatech ==========================================================================================================================
-  $urlToTranslate = "amp.exame.abril.com.br/seu-dinheiro/noticias/como-declarar-venda-e-doacao-de-imoveis-no-imposto-de-renda";
+  //$urlToTranslate = "amp.exame.abril.com.br/seu-dinheiro/noticias/como-declarar-venda-e-doacao-de-imoveis-no-imposto-de-renda";
+
+    //#== Eventos =====#
+    $urlToTranslate = "http://amp.exame.abril.com.br/tecnologia/noticias/site-devolve-dinheiro-para-quem-faz-compras";
 }
 
 $exameAmp = new ExameAmp($urlToTranslate,$debugMode, $environment);

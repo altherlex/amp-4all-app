@@ -341,9 +341,21 @@ Class ExameAmp
       foreach($blackList["strip_tags"] as $tag)
         foreach($body->find($tag) as $element)
           $element->outertext = $element->plaintext;
+
+    // STRIPED ATTRIBUTE TAGS
+    if (!is_null($blackList["strip_tags_attributes"]))
+      foreach($blackList["strip_tags_attributes"] as $tag){
+        foreach($body->find($tag) as $element){
+          preg_match('#\[(.*?)\]#',$tag,$atributo);
+          $element->outertext = preg_replace("#".$atributo[1]."=\".*?\"#","",$element->outertext);
+        }  
+      }
+    
     
     $this->SetHtmlBody($body);
   }
+
+
 
   private function SetFacebook(){
     $m = new Mustache_Engine;
