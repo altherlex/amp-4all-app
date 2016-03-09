@@ -26,5 +26,10 @@
   "strip_tags":[
     "font",
     "bbdc4\\.sa"
+
+  ],
+  "strip_tags_attributes":[
+    "a[onclick]"
   ]
+
 }
