@@ -41,7 +41,7 @@ if (!isset($argc)){
   // #=== Instagram ==========================================================================================================================
   // $urlToTranslate = "int.exame.abril.com.br/marketing/noticias/estilista-marc-jacobs-procura-por-modelos-no-instagram";
 
-  #=== Facebook =========================================================================================================================
+  // #=== Facebook =========================================================================================================================
   // $urlToTranslate = "int.amp.exame.abril.com.br/tecnologia/noticias/e-uma-das-maiores-descobertas-da-ciencia-diz-zuckerberg";
 
   // #=== Galeria Photos ==========================================================================================================================
@@ -70,6 +70,15 @@ if (!isset($argc)){
 
   // #=== Sambatech ==========================================================================================================================
   $urlToTranslate = "amp.exame.abril.com.br/seu-dinheiro/noticias/como-declarar-venda-e-doacao-de-imoveis-no-imposto-de-renda";
+
+  // #=== Tag bbdc4.sa ==========================================================================================================================
+  // $urlToTranslate = "amp.exame.abril.com.br/brasil/noticias/dilma-so-deve-anunciar-novos-ministros-a-partir-de-quarta";
+
+  // #=== Tag font ==========================================================================================================================
+  // $urlToTranslate = "amp.exame.abril.com.br/negocios/noticias/cielo-compra-50-m4u-r-50-1-milhoes-584277";
+
+  // #=== Table ==========================================================================================================================
+  // $urlToTranslate = "amp.exame.abril.com.br/revista-exame/noticias/luz-camera-cifrao-m0043689";
 }
 
 $exameAmp = new ExameAmp($urlToTranslate,$debugMode, $environment);
